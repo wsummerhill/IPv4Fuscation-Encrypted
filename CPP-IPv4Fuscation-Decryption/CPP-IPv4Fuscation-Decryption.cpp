@@ -143,8 +143,9 @@ int main()
 
     DWORD_PTR ptr = (DWORD_PTR)alloc_mem;
     int size = sizeof(ips_decrypted) / sizeof(ips_decrypted[0]);
+#if DEBUG
     std::cout << "Size of IP array: " << size << "\n";
-
+#endif
     // Loop through decrypted IP addresses
     for (int j = 0; j < size; j++) 
     {   
