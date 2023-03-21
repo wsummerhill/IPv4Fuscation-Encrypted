@@ -13,6 +13,18 @@ python3 IPv4encrypt-shellcode.py calc-x64.bin
 Take the encrypted IPv4 shellcode and paste it into the C++ project file `CPP-IPv4Fuscation-Decryption.cpp`, then compile and execute!
 
 
+### Technical Details:
+
+#### CPP-IPv4Fuscation-Decryption.cpp
+1. Read encrypred IPs into a char array
+  - Convert each IP to its integer equivalent
+  - Decrypt each integer using the XOR encryption key and convert it back to an IP address
+2. Initiate new heap space using **HeapCreate()** and **HeapAlloc()** functions from **Kernel32**
+3. Loop through decrypted IP addresses and convert it to its binary output using **RtlIpv4StringToAddressA()** function from **Ntdll**
+  - This function will also output binary data to the target heap address pointer "ptr"
+4. Execute shellcode on heap using the callback function **EnumSystemLocalsEx()** from **Kernel32**
+5. Free up memory addresses, heap space, and encrypted IP address variabels
+
 <br />
 
 --------------
