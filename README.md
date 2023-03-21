@@ -16,14 +16,15 @@ Take the encrypted IPv4 shellcode and paste it into the C++ project file `CPP-IP
 ### Technical Details:
 
 #### CPP-IPv4Fuscation-Decryption.cpp
-1. Read encrypred IPs into a char array
+1. Read encrypted IPs into a char array
   - Convert each IP to its integer equivalent
-  - Decrypt each integer using the XOR encryption key and convert it back to an IP address
+  - Decrypt each integer using the XOR encryption key
+  - Convert each decrypted int it to its IP address equivalent
 2. Initiate new heap space using **HeapCreate()** and **HeapAlloc()** functions from **Kernel32**
-3. Loop through decrypted IP addresses and convert it to its binary output using **RtlIpv4StringToAddressA()** function from **Ntdll**
+3. Loop through decrypted IP addresses and convert each to its binary format using **RtlIpv4StringToAddressA()** function from **Ntdll**
   - This function will also output binary data to the target heap address pointer "ptr"
-4. Execute shellcode on heap using the callback function **EnumSystemLocalsEx()** from **Kernel32**
-5. Free up memory addresses, heap space, and encrypted IP address variabels
+4. Execute shellcode on heap using the callback function **EnumSystemLocalsEx()** from **Kernel32** (feel free to use any execution technique here)
+5. Cleanup: Free up memory addresses, heap space, and encrypted IP address variabels
 
 <br />
 
